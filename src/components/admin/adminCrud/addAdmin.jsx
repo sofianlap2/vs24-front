@@ -154,7 +154,7 @@ const AddAdmin = () => {
                    onChange={(e) => setSelectedRole(e.target.value)}
                    required
                  >
-                   <option style={{fontFamily: 'Constantia'}} value="">Role</option>
+                   <option style={{fontFamily: 'Constantia'}} value="" disabled selected>Role</option>
                    <option style={{fontFamily: 'Constantia'}} value="ADMINPUB">Admin Publicité</option>
                    <option style={{fontFamily: 'Constantia'}} value="ADMINCLIENT">Admin Client</option>
                    <option style={{fontFamily: 'Constantia'}} value="ADMINDEMANDE">Admin Demande</option>

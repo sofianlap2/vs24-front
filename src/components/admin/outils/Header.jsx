@@ -2,7 +2,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import {jwtDecode} from 'jwt-decode'; // Corrected import statement
 import React, { useEffect, useState } from 'react';
-import { CssBaseline, ThemeProvider, IconButton, Badge, Menu, MenuItem, Typography, List, ListItem, ListItemText, Avatar } from '@mui/material';
+import { CssBaseline, ThemeProvider, IconButton, Badge, Menu, MenuItem, List, ListItem, ListItemText, Avatar, Grid } from '@mui/material';
 import Profile from './profile';
 import LightModeOutlinedIcon from '@mui/icons-material/LightMode';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
@@ -14,13 +14,11 @@ const appUrl = import.meta.env.VITE_REACT_APP_BASE_URL || 'http://localhost:9090
 const socket = io(`${appUrl}`);
 
 const Header = () => {
-  const [searchTerm, setSearchTerm] = useState('');
   const [user, setUser] = useState(null);
   const [theme, colorMode] = useMode();
   const [notifications, setNotifications] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0);
   const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
   const MAX_NOTIFICATIONS = 7;
 
   const logoPath =
@@ -38,30 +36,43 @@ const Header = () => {
     };
   };
 
-  // Function to format notification time
   const formatTimeAgo = (createdAt) => {
     const now = new Date();
     const notificationTime = new Date(createdAt);
+  
     const diffInMinutes = Math.floor((now - notificationTime) / (1000 * 60));
+    const diffInHours = Math.floor(diffInMinutes / 60);
+    const diffInDays = Math.floor(diffInHours / 24);
+    const diffInWeeks = Math.floor(diffInDays / 7);
+    const diffInMonths = Math.floor(diffInDays / 30);
+    const diffInYears = Math.floor(diffInMonths / 12);
+  
     if (diffInMinutes < 60) {
       return `Il y a ${diffInMinutes} minute${diffInMinutes > 1 ? 's' : ''}`;
-    } else {
-      const diffInHours = Math.floor(diffInMinutes / 60);
+    } else if (diffInHours < 24) {
       return `Il y a ${diffInHours} heure${diffInHours > 1 ? 's' : ''}`;
+    } else if (diffInDays < 7) {
+      return `Il y a ${diffInDays} jour${diffInDays > 1 ? 's' : ''}`;
+    } else if (diffInWeeks < 4) {
+      return `Il y a ${diffInWeeks} semaine${diffInWeeks > 1 ? 's' : ''}`;
+    } else if (diffInMonths < 12) {
+      return `Il y a ${diffInMonths} mois${diffInMonths > 1 ? 's' : ''}`;
+    } else {
+      return `Il y a ${diffInYears} an${diffInYears > 1 ? 's' : ''}`;
     }
   };
+  
 
   const fetchNotifications = async () => {
     try {
       const token = Cookies.get("token");
       const decodedToken = token ? jwtDecode(token) : null;
-      const email = decodedToken ? decodedToken.email : '';
       if (!token || !decodedToken) return;
 
       const response = await axios.get(`${appUrl}/notification/notificationsCount`, {
         headers: {
           "Content-Type": "application/json",
-          Authorization:  `${token}`,
+          Authorization: `${token}`,
         },
       });
       if (response.data.status === 'SUCCESS') {
@@ -84,7 +95,7 @@ const Header = () => {
       await axios.post(`${appUrl}/notification/${notificationId}/read`, {}, {
         headers: {
           "Content-Type": "application/json",
-          Authorization:  `${token}`,
+          Authorization: `${token}`,
         },
       });
       setNotifications(prevNotifications =>
@@ -154,83 +165,86 @@ const Header = () => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <header id="header" className="header fixed-top d-flex align-items-center">
-          <div className="d-flex align-items-center justify-content-between">
-            <a
-              href={`/dashboard/${window.btoa(email)}`}
-              className="logo d-flex align-items-center"
-              style={{ height: '20px' }}
-            >
-              <span>
-                <img
-                  src={logoPath}
-                  height="70px"
-                  alt="Logo"
-                  loading="lazy"
-                  style={getLogoStyle()}
-                />
-              </span>
-            </a>
-          </div>
-
-          <nav className="header-nav ms-auto" style={{ width: '100%', display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <ul className="d-flex align-items-center"style={{marginLeft:"30vw"}}>
-              <li>
-                <IconButton onClick={colorMode.toggleColorMode}>
-                  {theme.palette.mode === 'dark' ? (
-                    <DarkModeOutlinedIcon />
-                  ) : (
-                    <LightModeOutlinedIcon />
-                  )}
-                </IconButton>
-              </li>
-              <li>
-                <IconButton onClick={handleOpenMenu}>
-                  <Badge badgeContent={unreadCount} color="error">
-                    <NotificationsOutlinedIcon />
-                  </Badge>
-                </IconButton>
-                <Menu
-                  anchorEl={anchorEl}
-                  open={Boolean(anchorEl)}
-                  onClose={handleCloseMenu}
-                  PaperProps={{
-                    style: {
-                      maxHeight: 400,
-                      width: '100%',
-                      maxWidth: '300px',
-                    },
-                  }}
-                >
-                  {notifications.length > 0 ? (
-                    <List>
-                      {notifications.map(notification => (
-                       <ListItem
-                       key={notification._id}
-                       button
-                       onClick={() => {
-                         markNotificationAsRead(notification._id);
-                         handleCloseMenu();
-                       }}
-                     >
-                       <Avatar>{(notification.type && notification.type[0])}</Avatar>
-                       <ListItemText
-                         primary={notification.message }
-                         secondary={formatTimeAgo(notification.createdAt) }
-                         style={{ color: notification.read ? 'gray' : 'white' }}
-                       />
-                     </ListItem>
-                      ))}
-                    </List>
-                  ) : (
-                    <MenuItem>0 notifications</MenuItem>
-                  )}
-                </Menu>
-              </li>
-              <li>
-                <Profile />
-              </li>
-            </ul>
-          </nav>
+          <Grid container alignItems="center" justifyContent="space-between" style={{ width: '100%' }}>
+            <Grid item xs={6} sm={4} md={3} lg={2}>
+              <a
+                href={`/dashboard/${window.btoa(email)}`}
+                className="logo d-flex align-items-center"
+                style={{ height: '20px' }}
+              >
+                <span>
+                  <img
+                    src={logoPath}
+                    height="70px"
+                    alt="Logo"
+                    loading="lazy"
+                    style={getLogoStyle()}
+                  />
+                </span>
+              </a>
+            </Grid>
+            <Grid item xs={6} sm={8} md={9} lg={10}>
+              <nav className="header-nav ms-auto" style={{ display: 'flex', alignItems: 'center', gap: '10px', justifyContent: 'flex-end' }}>
+                <ul className="d-flex align-items-center" style={{ listStyle: 'none', display: 'flex', margin: 0, padding: 0 }}>
+                  <li>
+                    <IconButton onClick={colorMode.toggleColorMode}>
+                      {theme.palette.mode === 'dark' ? (
+                        <DarkModeOutlinedIcon />
+                      ) : (
+                        <LightModeOutlinedIcon />
+                      )}
+                    </IconButton>
+                  </li>
+                  <li>
+                    <IconButton onClick={handleOpenMenu}>
+                      <Badge badgeContent={unreadCount} color="error">
+                        <NotificationsOutlinedIcon />
+                      </Badge>
+                    </IconButton>
+                    <Menu
+                      anchorEl={anchorEl}
+                      open={Boolean(anchorEl)}
+                      onClose={handleCloseMenu}
+                      PaperProps={{
+                        style: {
+                          maxHeight: 400,
+                          width: '100%',
+                          maxWidth: '300px',
+                        },
+                      }}
+                    >
+                      {notifications.length > 0 ? (
+                        <List>
+                          {notifications.map(notification => (
+                            <ListItem
+                              key={notification._id}
+                              button
+                              onClick={() => {
+                                markNotificationAsRead(notification._id);
+                                handleCloseMenu();
+                              }}
+                            >
+                              <Avatar>{(notification.type && notification.type[0])}</Avatar>
+                              <ListItemText
+                                primary={notification.message}
+                                secondary={formatTimeAgo(notification.createdAt)}
+                                style={{ color: notification.read ? 'gray' : 'white' }}
+                              />
+                            </ListItem>
+                          ))}
+                        </List>
+                      ) : (
+                        <MenuItem>0 notifications</MenuItem>
+                      )}
+                    </Menu>
+                  </li>
+                  <li>
+                    <Profile />
+                  </li>
+                </ul>
+              </nav>
+            </Grid>
+          </Grid>
         </header>
       </ThemeProvider>
     </ColorModeContext.Provider>

@@ -262,7 +262,7 @@ const DemandePub = ({ setShowDemandePubs }) => {
                     setReqBody({ ...reqBody, gouvernorat: e.target.value });
                   }}
                 >
-                  <option value=""disabled>Gouvernorat</option>
+                  <option value=""disabled selected>Gouvernorat</option>
                   <option value="Ariana">Ariana</option>
                   <option value="Béja">Béja</option>
                   <option value="BenArous">BenArous</option>
@@ -306,7 +306,7 @@ const DemandePub = ({ setShowDemandePubs }) => {
                     setReqBody({ ...reqBody, ville: e.target.value });
                   }}
                 >
-                  <option value=""disabled>Select Ville</option>
+                  <option value=""disabled selected>Select Ville</option>
                   {cities.map((ville) => (
                     <option key={ville} value={ville}>
                       {ville}
@@ -331,11 +331,13 @@ const DemandePub = ({ setShowDemandePubs }) => {
                     setReqBody({ ...reqBody, typeEspace: e.target.value });
                   }}
                 >
-                  <option value=""disabled>Select Type</option>
-                  <option value="MALL">Mall</option>
-                  <option value="HOTEL">Hotel</option>
-                  <option value="SALLESPORT">Salle de sport</option>
-                  <option value="HOPITAL">Hopital</option>
+                  <option style={{fontFamily: 'Constantia'}} value=""disabled selected>Select Type</option>
+                  <option style={{fontFamily: 'Constantia'}} value="MALL">Mall</option>
+                  <option style={{fontFamily: 'Constantia'}} value="HOTEL">Hotel</option>
+                  <option style={{fontFamily: 'Constantia'}} value="SALLESPORT">Salle de sport</option>
+                  <option style={{fontFamily: 'Constantia'}} value="HOPITAL">Hopital</option>
+                  <option style={{fontFamily: 'Constantia'}} value="AUTRE">Autre</option>
+
                 </select>
               </label>
             </th>

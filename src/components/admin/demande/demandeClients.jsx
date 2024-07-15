@@ -159,7 +159,7 @@ const DemandeClients = ({ setShowDemandeClients }) => {
               value={selectedGovernorate}
               onChange={(e) => { setSelectedGovernorate(e.target.value); setReqBody({ ...reqBody, gouvernorat: e.target.value }); }}
             >
-              <option value=""disabled>Sélectionnez le gouvernorat</option>
+              <option value=""disabled selected>Sélectionnez le gouvernorat</option>
               <option value="Ariana">Ariana</option>
               <option value="Béja">Béja</option>
               <option value="BenArous">BenArous</option>
@@ -195,7 +195,7 @@ const DemandeClients = ({ setShowDemandeClients }) => {
               value={selectedCity}
               onChange={(e) => { setSelectedCity(e.target.value); setReqBody({ ...reqBody, ville: e.target.value }); }}
             >
-              <option value=""disabled>Sélectionnez la ville</option>
+              <option value=""disabled selected>Sélectionnez la ville</option>
               {cities.map(ville => (
                 <option key={ville} value={ville}>{ville}</option>
               ))}

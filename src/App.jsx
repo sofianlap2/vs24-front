@@ -40,6 +40,12 @@ import ModifierClient from "./components/client/clientCrud/modifierClient";
 import UpdateUser from "./components/admin/adminCrud/updateUser";
 import ArchiveUsers from "./components/admin/archive/archiveUser";
 import NotFound from "./components/notFound";
+import StationsManagementClient from "./components/client/station/stationsManagementClient";
+import AddPublicite from "./components/publicite/addPublicite";
+import EspaceSansPub from "./components/publicite/epaceSansPub";
+import PublicitesManagementPub from "./components/publicite/publiciteManagementPub";
+import PublicitesManagement from "./components/admin/publicites/publicitesManagement";
+import DecisionPub from "./components/admin/publicites/decisionPub";
 
 function App() {
   const { email } = useParams();
@@ -116,6 +122,9 @@ function App() {
           <Route path="/firstUpdate/:email" element={<FirstUpdate />} />
           <Route path="/cassierManagement/:email" element={<CassierManagement />} />
           <Route path="/dashboard/:email" element={<Dashboard />} />
+          <Route path="/pubsManagement/:email" element={<PublicitesManagement />} />
+          <Route path="/decisionPub/:pubId" element={<DecisionPub />} />
+
           </>) : null}
 
           {/* Autorisation pour les role client et publicitaire */}
@@ -124,6 +133,12 @@ function App() {
           <Route path="/addReclamation/:email" element={<AddReclamation />} />
           <Route path="/reclamationsClient/:email" element={<ReclamationsManagementClient />} />
           <Route path="/espacesClient/:email" element={<EspacesManagementClient />} />
+          <Route path="/espacesSansPub/:email" element={<EspaceSansPub />} />
+
+          <Route path="/stationsClient/:email" element={<StationsManagementClient />} />
+          <Route path="/addPublicite/:email" element={<AddPublicite />} />
+          <Route path="/publicitesManagementPub/:email" element={<PublicitesManagementPub />} />
+
           <Route path="/passwordClient" element={<ChangePasswordClient />} />
           <Route path="/consulterClient/:email" element={<ConsulterClient />} />
           <Route path="/modifierClient/:email" element={<ModifierClient />} />

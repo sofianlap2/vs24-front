@@ -128,7 +128,7 @@ const AddEspacePublic = () => {
               <div>
                  <label style={{ fontFamily: 'Constantia'}} htmlFor="gouvernorat">Gouvernorat:</label>
                 <select className="form-select"  aria-label="Default select example" onChange={(e) => setReqBody({ ...reqBody, gouvernorat: e.target.value })}>
-                   <option style={{ fontFamily: 'Constantia'}} value=""disabled>Gouvernorat</option>
+                   <option style={{ fontFamily: 'Constantia'}} value=""disabled selected>Gouvernorat</option>
                    <option style={{ fontFamily: 'Constantia'}} value="Ariana">Ariana</option>
                    <option style={{ fontFamily: 'Constantia'}} value="Béja">Béja</option>
                    <option style={{ fontFamily: 'Constantia'}} value="BenArous">BenArous</option>
@@ -168,12 +168,13 @@ const AddEspacePublic = () => {
                  <label style={{ fontFamily: 'Constantia'}}>
                   Type Espace:</label>
                   <select className="form-select"  aria-label="Default select example" onChange={(e) => setReqBody({ ...reqBody, typeEspace: e.target.value })}>
-                     <option style={{ fontFamily: 'Constantia'}} value=""disabled>Select Type</option>
+                     <option style={{ fontFamily: 'Constantia'}} value=""disabled selected>Select Type</option>
                      <option style={{ fontFamily: 'Constantia'}} value="MALL">Mall</option>
                      <option style={{ fontFamily: 'Constantia'}} value="HOTEL">Hotel</option>
                      <option style={{ fontFamily: 'Constantia'}} value="SALLESPORT">Salle de sport</option>
                      <option style={{ fontFamily: 'Constantia'}} value="HOPITAL">Hopital</option>
-                  </select>
+                     <option style={{ fontFamily: 'Constantia'}} value="AUTRE">Autre</option>
+                     </select>
                 
               </div>
               <div>

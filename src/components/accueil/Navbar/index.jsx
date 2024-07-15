@@ -201,7 +201,7 @@ const Navbar = ({ toggle, setShowDemandeClients,setShowDemandePubs }) => {
                       style={{
                         position: "absolute",
                         top: "7.5vh",
-                        left: 1190,
+                        left: 1300,
                         background: "transparent",
                         borderRadius: "5px",
                         zIndex: 0,

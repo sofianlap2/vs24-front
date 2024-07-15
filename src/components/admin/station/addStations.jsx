@@ -151,7 +151,7 @@ const AddStation = () => {
                   aria-label="Default select example"
                   onChange={(e) => setSelectedGovernorate(e.target.value)}
                 >
-                   <option style={{ fontFamily: 'Constantia'}} value="" disabled>
+                   <option style={{ fontFamily: 'Constantia'}} value="" disabled selected >
                     Gouvernorat
                   </option>
                    <option style={{ fontFamily: 'Constantia'}}  value="Ariana">Ariana</option>
@@ -187,7 +187,7 @@ const AddStation = () => {
                   aria-label="Default select example"
                   onChange={(e) => setSelectedCity(e.target.value)}
                 >
-                   <option style={{ fontFamily: 'Constantia'}} value="" disabled>
+                   <option style={{ fontFamily: 'Constantia'}} value="" disabled selected>
                     Select Ville
                   </option>
                   {cities.map((ville) => (
@@ -205,13 +205,15 @@ const AddStation = () => {
                     aria-label="Default select example"
                     onChange={(e) => setSelectedTypeEspace(e.target.value)}
                   >
-                     <option style={{ fontFamily: 'Constantia'}} value="" disabled>
+                     <option style={{ fontFamily: 'Constantia'}} value="" disabled selected>
                       Select Type
                     </option>
                      <option style={{ fontFamily: 'Constantia'}} value="MALL">Mall</option>
                      <option style={{ fontFamily: 'Constantia'}} value="HOTEL">Hotel</option>
                      <option style={{ fontFamily: 'Constantia'}} value="SALLESPORT">Salle de sport</option>
                      <option style={{ fontFamily: 'Constantia'}} value="HOPITAL">Hopital</option>
+                     <option style={{ fontFamily: 'Constantia'}} value="AUTRE">Autre</option>
+
                   </select>
                 </div>
               </div>
@@ -223,7 +225,7 @@ const AddStation = () => {
                     aria-label="Default select example"
                     onChange={(e) => setSelectedEspacePublic(e.target.value)}
                   >
-                     <option style={{ fontFamily: 'Constantia'}} value="" >Select Espace</option>
+                     <option style={{ fontFamily: 'Constantia'}} value="" disabled selected>Select Espace</option>
                     {espacePublics.map((espacePublic) => (
                        <option style={{ fontFamily: 'Constantia'}} key={espacePublic._id} value={espacePublic._id}>
                         {espacePublic.nomEspace}
@@ -279,7 +281,7 @@ const AddStation = () => {
                     aria-label="Default select example"
                     onChange={(e) => setReqBody({ ...reqBody, status: e.target.value })}
                   >
-                      <option style={{ fontFamily: 'Constantia'}} value="" disabled>Select Status</option>
+                      <option style={{ fontFamily: 'Constantia'}} value="" disabled selected>Select Status</option>
                      <option style={{ fontFamily: 'Constantia'}} value="LIBRE">Libre</option>
                      <option style={{ fontFamily: 'Constantia'}} value="LOUE">Loué</option>
                      <option style={{ fontFamily: 'Constantia'}} value="ENMAINTENANCE">En Maintenance</option>

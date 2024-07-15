@@ -30,7 +30,6 @@ const AddCathegorie = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('gg', tokenValue)
     try {
       const response = await axios.post(
         `${appUrl}/cathegories/${window.atob(email)}/addCathegorie`,
@@ -38,7 +37,7 @@ const AddCathegorie = () => {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${tokenValue}`,
+            Authorization: ` ${tokenValue}`,
           },
         }
       );

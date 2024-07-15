@@ -84,7 +84,7 @@ const AddReclamation = () => {
         navigate(`/reclamationsClient/${window.btoa(email)}`);
       }, 2000);
     } catch (error) {
-      toast.error('Erreur lors de l\'ajout de la réclamation');
+      toast.error(error.response.data.message );
     }
   };
 
@@ -118,7 +118,7 @@ const AddReclamation = () => {
                 onChange={(e) => setSelectedCategorie(e.target.value)}
                 style={{ width: '100%', padding: '8px', marginBottom: '16px' }}
               >
-                <option style={{fontFamily: 'Constantia'}}value="">Select Catégorie</option>
+                <option style={{fontFamily: 'Constantia'}}value="" disabled selected>Select Catégorie</option>
                 {cathegories.map((cathegorie) => (
                   <option key={cathegorie._id} value={cathegorie._id} style={{fontFamily: 'Constantia'}}>{cathegorie.name}</option>
                 ))}

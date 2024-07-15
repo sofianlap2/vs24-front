@@ -42,13 +42,13 @@ const ChartPieStation = () => {
         axis: {
           ticks: {
             text: {
-              fill: colors.primary[400],
+              fill: '#000000',
             },
           },
         },
-        grid: {
-          line: {
-            stroke: theme.palette.primary.main,
+        labels: {
+          text: {
+            fill: '#777777',
           },
         },
       });
@@ -104,7 +104,7 @@ const ChartPieStation = () => {
       theme={getTheme()}
       borderWidth={1}
       radialLabelsSkipAngle={10}
-      radialLabelsTextColor={theme.palette.secondary}
+      radialLabelsTextColor={theme.palette.primary}
       radialLabelsLinkColor={{ from: 'color' }}
       sliceLabelsSkipAngle={10}
       // sliceLabelsTextColor={theme.palette.text.secondary}

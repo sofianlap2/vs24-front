@@ -4,11 +4,12 @@ import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
-import HeaderClient from "../outils/header/headerClient";
-import SidebarClient from "../outils/sidebar/sidebarClient";
-import { tokens } from "../../../theme";
 
-const EspacesManagementClient = () => {
+import { tokens } from "../../theme";
+import HeaderClient from "../client/outils/header/headerClient";
+import SidebarClient from "../client/outils/sidebar/sidebarClient";
+
+const EspaceSansPub = () => {
   const { email } = useParams();
   const navigate = useNavigate();
   const appUrl = import.meta.env.VITE_REACT_APP_BASE_URL;
@@ -68,16 +69,8 @@ const EspacesManagementClient = () => {
   useEffect(() => {
     const fetchEspaces = async () => {
       try {
-        let endpoint = '';
-
-        if (role === "CLIENT" && verified) {
-          endpoint = `${appUrl}/espacePublic/EspacesClient`;
-        } else if (role === "PUBLICITAIRE" && verified) {
-          endpoint = `${appUrl}/espacePublic/espacePubliciteManagemenet`;
-        }
-
-        if (endpoint) {
-          const response = await axios.get(endpoint, {
+      
+          const response = await axios.get(`${appUrl}/espacePublic/espaceFilterForPublicite`, {
             headers: {
               "Content-Type": "application/json",
               Authorization: `${tokenValue}`,
@@ -90,7 +83,7 @@ const EspacesManagementClient = () => {
           }));
 
           setEspaces(espacesWithIds);
-        }
+        
       } catch (error) {
         console.error("Error fetching espaces:", error);
       }
@@ -166,4 +159,4 @@ const EspacesManagementClient = () => {
   );
 };
 
-export default EspacesManagementClient;
+export default EspaceSansPub;

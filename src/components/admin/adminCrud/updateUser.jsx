@@ -199,7 +199,7 @@ const UpdateUser = () => {
                     setReqBody({ ...reqBody, role: e.target.value })
                   }
                 >
-                  <option style={{ fontFamily: "Constantia" }} value="">
+                  <option style={{ fontFamily: "Constantia" }} value="" disabled selected>
                     Role
                   </option>
                   <option

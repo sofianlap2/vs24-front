@@ -130,7 +130,7 @@ const UpdateEspacePublic = () => {
               <div>
                 <label style={{fontFamily: 'Constantia'}}>Gouvernorat:</label>
                 <select className="form-select" value={reqBody.gouvernorat} onChange={(e) => setReqBody({ ...reqBody, gouvernorat: e.target.value })}>
-                  <option style={{fontFamily: 'Constantia'}} value="" disabled>Gouvernorat</option>
+                  <option style={{fontFamily: 'Constantia'}} value="" disabled selected>Gouvernorat</option>
                   <option style={{fontFamily: 'Constantia'}} value="Ariana">Ariana</option>
                   <option style={{fontFamily: 'Constantia'}} value="Béja">Béja</option>
                   <option style={{fontFamily: 'Constantia'}} value="BenArous">BenArous</option>
@@ -160,7 +160,7 @@ const UpdateEspacePublic = () => {
               <div>
                 <label style={{fontFamily: 'Constantia'}}>Ville:</label>
                 <select className="form-select" value={reqBody.ville} onChange={(e) => setReqBody({ ...reqBody, ville: e.target.value })}>
-                  <option style={{fontFamily: 'Constantia'}} value="" disabled>Select Ville</option>
+                  <option style={{fontFamily: 'Constantia'}} value="" disabled selected>Select Ville</option>
                   {cities.map(ville => (
                     <option style={{fontFamily: 'Constantia'}} key={ville} value={ville}>{ville}</option>
                   ))}
@@ -169,17 +169,18 @@ const UpdateEspacePublic = () => {
               <div>
                 <label style={{fontFamily: 'Constantia'}}>Type Espace:</label>
                 <select className="form-select" value={reqBody.typeEspace} onChange={(e) => setReqBody({ ...reqBody, typeEspace: e.target.value })}>
-                  <option style={{fontFamily: 'Constantia'}} value="" disabled>Select Type</option>
+                  <option style={{fontFamily: 'Constantia'}} value="" disabled selected>Select Type</option>
                   <option style={{fontFamily: 'Constantia'}} value="MALL">Mall</option>
                   <option style={{fontFamily: 'Constantia'}} value="HOTEL">Hotel</option>
                   <option style={{fontFamily: 'Constantia'}} value="SALLESPORT">Salle de sport</option>
                   <option style={{fontFamily: 'Constantia'}} value="HOPITAL">Hopital</option>
+                  <option style={{fontFamily: 'Constantia'}} value="AUTRE">Autre</option>
                 </select>
               </div>
               <div>
                 <label style={{fontFamily: 'Constantia'}}>User with Client Role:</label>
                 <select className="form-select" value={selectedUser} onChange={(e) => setSelectedUser(e.target.value)}>
-                  <option style={{fontFamily: 'Constantia'}} value="" disabled>Select User</option>
+                  <option style={{fontFamily: 'Constantia'}} value="" disabled selected>Select User</option>
                   {usersWithClientRole.map((user) => (
                     <option style={{fontFamily: 'Constantia'}} key={user._id} value={user._id}>{user.nomEntreprise}</option>
                   ))}
