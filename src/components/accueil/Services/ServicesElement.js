@@ -93,11 +93,12 @@ export const ServicesWrapper = styled.div`
 `;
 
 export const ServicesCard = styled.div`
-  background: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
   border-radius: 20px;
+            background-color: rgba(210, 199, 199, 0.5);
+
    width: 672px;
   margin-top: 17px;
   max-width: 100%; /* Set the width */
@@ -129,12 +130,11 @@ display:flex
 width: 100%;
   max-width:500px;
   
-  background-color: #fff;
-  border: 1px solid #e0e0e0;
-  border-radius: 20px;
+   border-radius: 20px;
+          background-color: rgba(210, 199, 199, 0.5);
   padding: 20px;
   text-align: center;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
   &:hover {
     transform: scale(1.02);
     transition: all 0.2s ease-in-out;
@@ -164,7 +164,7 @@ export const ServicesIconVs = styled.img`
 `;
 export const ServicesPVS = styled.p`
     font-size: 16px;
-  color: #333;
+  color: #fff;
   font-weight: normal;
   margin-top: 50px;
 
@@ -292,7 +292,6 @@ export const VideoBg = styled.video`
 export const ServicesH2 = styled.h2`
   font-size: 2rem;
   margin-bottom: 30px;
-  direction: rtl;
   text-align: center;
 
 
@@ -301,7 +300,6 @@ export const ServicesH2 = styled.h2`
 export const ServicesP = styled.p`
   font-size: 1.6rem;
   text-align: center;
-  direction: rtl;
   font-size:30px
   width: 100%;
   height:100%

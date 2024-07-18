@@ -12,15 +12,15 @@ import { format, isValid, parseISO } from "date-fns";
 const DecisionPub = () => {
   const navigate = useNavigate();
   const appUrl = import.meta.env.VITE_REACT_APP_BASE_URL;
-  const { email,pubId } = useParams();
+  const { email, pubId } = useParams();
   const [reqBody, setReqBody] = useState({
     user: {},
     espacePublic: [],
     dateDebPub: "",
     dateFinPub: "",
     status: "",
+    video: null,
   });
-  
 
   useEffect(() => {
     const fetchPubliciteDetails = async () => {
@@ -32,9 +32,10 @@ const DecisionPub = () => {
             Authorization: ` ${token}`,
           },
         });
-  
+
         if (response.data && response.data.user) {
           setReqBody(response.data);
+          console.log("Video Data:", response.data.video);
         } else {
           toast.error("Invalid response format.");
         }
@@ -42,17 +43,16 @@ const DecisionPub = () => {
         toast.error("Failed to fetch publicite details.");
       }
     };
-  
+
     fetchPubliciteDetails();
   }, [pubId]);
-  
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
     try {
       const token = Cookies.get("token");
-      const response = await axios.put(
+      await axios.put(
         `${appUrl}/publicites/updatePub/${pubId}`,
         {
           status: reqBody.status,
@@ -67,18 +67,43 @@ const DecisionPub = () => {
 
       toast.success("Publicité mise à jour avec succès");
       setTimeout(() => {
-        navigate(`/dashboard/${window.btoa(reqBody.email)}`);
+        navigate(`/dashboard/${window.btoa(email)}`);
       }, 3000);
     } catch (error) {
       toast.error("Erreur lors de la mise à jour de la publicité");
     }
   };
+
   const renderDateRec = (params) => {
     if (!params.value) return "N/A";
     const date = parseISO(params.value);
     if (!isValid(date)) return "Invalid date";
-    return format(date, 'dd/MM/yyyy');
+    return format(date, "dd/MM/yyyy");
   };
+
+  const renderVideo = () => {
+    if (reqBody.video && reqBody.video.data) {
+      const videoSrc = `data:${reqBody.video.contentType};base64,${reqBody.video.data}`;
+      return (
+        <video
+          width="320" 
+          height="240" 
+          controls 
+          onError={(e) => {
+            console.error("Error loading video:", e.nativeEvent);
+            toast.error("Error loading video. Please check the console for more details.");
+          }}
+        >
+          <source src={videoSrc} type={reqBody.video.contentType} />
+          Your browser does not support the video tag.
+        </video>
+      );
+    }
+    return null;
+  };
+  
+
+
   return (
     <main id="updatePublicite" className="updatePublicite">
       <Header />
@@ -136,14 +161,14 @@ const DecisionPub = () => {
                 <strong style={{ fontFamily: "Constantia" }}>Date fin Publicité:</strong> {renderDateRec({ value: reqBody.dateFinPub })}
               </p>
               <br />
+              {renderVideo()}
+<br />
               <div>
                 <label style={{ fontFamily: "Constantia" }}>Status:</label>
                 <select
                   className="form-select"
                   value={reqBody.status}
-                  onChange={(e) =>
-                    setReqBody({ ...reqBody, status: e.target.value })
-                  }
+                  onChange={(e) => setReqBody({ ...reqBody, status: e.target.value })}
                 >
                   <option style={{ fontFamily: "Constantia" }} value="" disabled selected>
                     Status
@@ -175,7 +200,6 @@ const DecisionPub = () => {
       </div>
     </main>
   );
-  
 };
 
 export default DecisionPub;

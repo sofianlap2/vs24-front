@@ -96,8 +96,8 @@ const Services = () => {
         <ServicesCard>
         <ServicesIcon src={cards[currentCard].icon}/>
 
-            <ServicesH2 style={{ fontFamily: 'Constantia, sans-serif', fontWeight: 'bold',color:'#000' }}>{cards[currentCard].title}</ServicesH2>
-            <ServicesP style={{ fontFamily: 'Constantia ,sans-serif', fontWeight: 'normal', color: '#757575'}}>
+            <ServicesH2 style={{ fontFamily: 'Constantia', fontWeight: 'bold',color:'#fff' }}>{cards[currentCard].title}</ServicesH2>
+            <ServicesP style={{ fontFamily: 'Constantia ', fontWeight: 'normal', color: '#fff'}}>
             {cards[currentCard].description}
             </ServicesP>
             <NavigationButtons >
@@ -123,7 +123,7 @@ const Services = () => {
       {Vs.map((item, index) => (
         <ServicesCardVS key={index}>
           <ServicesIconVs  style={{  fontWeight: 'bold' }} src={item.icon} />
-          <ServicesPVS>{item.description}</ServicesPVS>
+          <ServicesPVS style={{ fontFamily: 'Constantia '}}>{item.description}</ServicesPVS>
         </ServicesCardVS>
       ))}
     </ServicesDivVS>

@@ -43,16 +43,13 @@ export const NavLogo = styled(LinkR)`
   border-radius: 50px;
   justify-self: flex-start;
   cursor: pointer;
-  display: flex;
+  display:flex;
   font-size: 1rem;
-  align-items: center;
-  font-weight: bold;
+  align-items:center;
+  margin-left:20px;
+  font-weight:bold;
   text-decoration: none;
-  margin-top: 30px ;
-  @media only screen and (max-width: 600px) {
-    height: 10%;
-    width: 10%;
-  }
+
 `;
 
 export const MobileIcon = styled.div`
