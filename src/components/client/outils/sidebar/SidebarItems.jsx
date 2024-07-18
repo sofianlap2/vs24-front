@@ -8,7 +8,6 @@ import NavGroup from './NavGroup/NavGroup';
 import {
   IconBell,
   IconBuildingSkyscraper,
-  IconExclamationCircle,
    IconLayoutDashboard,
    IconLayoutSidebarLeftCollapse,
 } from '@tabler/icons';
