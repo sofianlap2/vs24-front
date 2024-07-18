@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import Video from '../../../videos/video.mp4';
+import Video from '../../../videos/Bochra.mp4';
 
 import {
   FormInput,
@@ -16,6 +16,7 @@ import {
   FormLinks,
   VideoBg,
   HeroBg,
+  NavBtn,
 } from './requestChangePwElement';
 import { ToastContainer, toast } from "react-toastify";
 function RequestResetPassword() {
@@ -78,9 +79,12 @@ function RequestResetPassword() {
                 />
               </div>
               <br />
-              <FormButton type="submit" style={{fontFamily: 'Constantia',fontWeight:"bold"}}>
+              <NavBtn>
+                <FormButton type="submit" style={{fontFamily: 'Constantia',fontWeight:"bold"}}>
                 Demander la réinitialisation du mot de passe
               </FormButton>
+              </NavBtn>
+              
             </Form>
             
             

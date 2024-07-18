@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import Video from '../../../videos/video.mp4';
+import Video from '../../../videos/Bochra.mp4';
 
 import {
   FormInput,
@@ -16,6 +16,7 @@ import {
   FormLinks,
   VideoBg,
   HeroBg,
+  NavBtn,
 } from './requestChangePwElement';
 import { ToastContainer, toast } from "react-toastify";
 function ResetPassword() {
@@ -91,7 +92,10 @@ function ResetPassword() {
               />
             </div>
             <br></br>
-            <FormButton type="submit" style={{fontFamily: 'Constantia',fontWeight:"bold"}}>Réinitialiser le mot de passe</FormButton>
+            <NavBtn>
+                          <FormButton type="submit" style={{fontFamily: 'Constantia',fontWeight:"bold"}}>Réinitialiser le mot de passe</FormButton>
+
+            </NavBtn>
             </Form>
             
             

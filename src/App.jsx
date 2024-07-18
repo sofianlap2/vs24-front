@@ -60,6 +60,8 @@ function App() {
       try {
         const response = await axios.get(`${appUrl}/users/${email}/userRole`, {
           headers: {
+            "Content-Type": "application/json",
+
             Authorization: `${tokenValue}`,
           },
         });
@@ -102,6 +104,8 @@ function App() {
           <Route path="/resetPassword/:token" element={<ResetPassword />} />
           <Route path="/requestResetPassword" element={<RequestResetPassword />}/>
           <Route path="/users/:id/verify/:token" element={<EmailVerify />} />
+          <Route path="/demandeClient" element={<DemandeClients />} />
+          <Route path="/demandePub" element={<DemandePub />} />
 
            {/* Autorisation pour les roles superAdmin , adminPub , adminClient et adminDemande */}
 

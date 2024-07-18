@@ -13,7 +13,7 @@ height: 100% ;
 background : #0d0d0d;
 display: grid;
 aligne-items: center;
-top: 0;
+top: 10vh;
 left: 0;
 transition: 0.3s ease-in-out;
 opacity: ${({ isOpen }) => (isOpen ? '100%' : '0')};
@@ -41,6 +41,7 @@ outline: none;
 `;
 export  const SidebarWrapper = styled.div`
 color:  #fff;
+margin-top: 70px;
 `;
 export const SidebarMenu = styled.ul`
 display: grid;
@@ -64,30 +65,36 @@ color:  #fff;
 text-decoration: none;
 cursor:pointer;
 &:hover {
-    color:#8fd1e3;
-    transition: 0.2s ease-in-out;
-    }
+    background-color: #0000; // Couleur de fond au survol
+    color: #9e0000; // Couleur du texte au survol
+  }
 
 `;
-export const SideBtnWrap = styled.div`
+export const SideBtnWrap = styled.nav`
     display:flex;
     justify-content:center;
+    
+  }
 
 `;
 export const SidebarRoute = styled(LinkR)`
-    border-radius: 50px;
-    background: #8fd1e3;
-    white-space: nowrap;
-        padding: 16px 64px;
-        font-size: 16px;
-        text-decoration: none;
-        color: #000;
-        transition: all  0.2s ease-in-out;
-        cursor: pointer;
-        outline: none;
-        &:hover{
-            transition: all   0.2s ease-in-out;
-            background: #fff;
+border-radius: 6.111px;
+  box-shadow: 0px 4.889px 4.889px 0px rgba(0, 0, 0, 0.25);
+  background-color: #9e0000;
+
+  padding: 6px 13px;
+  font: 12px Constantia, sans-serif;
+  text-decoration: none; // Supprimer le soulignement par défaut des liens
+  color: #ffff; // Définir la couleur du texte
+  align-items: center;
+  cursor: pointer;
+  text-align: center;
+  white-space: nowrap; // Empêcher le retour à la ligne
+  display: block; // Ensure the button is a block element
+  &:hover {
+    background-color: #fff; // Couleur de fond au survol
+    color: #9e0000; // Couleur du texte au survol
+  }
 `;
 export const SidebarLi = styled.li`
     white-space: nowrap;
@@ -101,4 +108,11 @@ export const SidebarLi = styled.li`
         &:hover{
             transition: all   0.2s ease-in-out;
             background: #fff;
+`;
+export const NavDropDown = styled.li`
+ display: flex; /* Masqué par défaut */
+ align-items: center;
+justify-content: center;
+ 
+   
 `;

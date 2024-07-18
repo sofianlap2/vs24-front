@@ -1,14 +1,15 @@
-import img1 from '../../../images/svg-1.png';
+import img1 from '../../../../public/images/RemoteHub.png';
 import video2 from '../../../videos/cc.mp4';
 import img3 from '../../../images/svg-3.png';
-
+import video from '../../../videos/sectionBg.mp4';
 export const homeObjOne = {
   id: 'about',
-  lightBg: true,
+  videoBg: video,
+
   lightText: false,
   lightTextDesc: false,
   topLine: '',
-  headline: "Qui sommes nous",
+  headline: "Qui Sommes Nous ?",
   description: "Voltwise Solutions se spécialise dans la conception, le développement et le déploiement de bornes connectées, en mettant l'accent sur les entreprises accueillant du public. Notre expertise couvre l'ensemble du processus, de l'analyse initiale à la phase de conception, en passant par un soutien dédié à nos clients pour l'intégration de services connectés destinés à leurs visiteurs. Notre produit phare est une borne de recharge pour appareils électroniques, spécifiquement conçue pour améliorer l'expérience d'accueil en offrant un service de recharge automatique et sécurisé.",
   buttonLabel: 'Get started',
   imgStart: false,
@@ -16,14 +17,14 @@ export const homeObjOne = {
   alt: 'Welcome',
   dark: true,
   primary: true,
-  darkText: true
+  darkText: false
 };
 
 export const homeObjTwo = {
   id: 'produits',
-  lightBg: true,
-  lightText: false,
-  lightTextDesc: false,
+  lightBg: false,
+  lightText: true,
+  lightTextDesc: true,
   topLine: 'Rejoindre à nous',
   headline: "Créer un compte est simple et ne prend qu'une minute !",
   description: "Obtenez tout installé et prêt en moins de 10 minutes. Tout ce que vous avez à faire est d'ajouter vos informations et vous êtes prêt à partir.",

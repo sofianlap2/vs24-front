@@ -6,7 +6,10 @@ const SigninPage = () => {
   return (
     <>
     <ScrollToTop />
-      <SignIn/>
+    <div style={{background:'#000'}}>
+            <SignIn/>
+
+    </div>
     </>
   )
 }

@@ -13,7 +13,6 @@ import { homeObj } from "../components/accueil/Map/DataMAp";
 import Services from "../components/accueil/Services";
 import Footer from "../components/accueil/Footer";
 import Map from "../components/accueil/Map/map";
-import { Trans } from "react-i18next";
 import DemandeClients from "../components/admin/demande/demandeClients";
 import DemandePub from "../components/admin/demande/demandePub";
 
@@ -38,6 +37,7 @@ const Home = () => {
 
   return (
     <>
+    
       {showDemandeClients && (
         <div
           className="col-12"
@@ -54,8 +54,8 @@ const Home = () => {
           <DemandePub setShowDemandePubs={setShowDemandePubs}/>
         </div>
       )}
-      <Trans>
-        <Sidebar isOpen={isOpen} toggle={toggle} />
+     <div style={{background:"#000000", width:'auto'}}>
+     <Sidebar isOpen={isOpen} toggle={toggle} />
         <Navbar 
           toggle={toggle} 
           setShowDemandeClients={showDemandeClientsHandler}
@@ -66,15 +66,17 @@ const Home = () => {
         <InfoSection {...homeObjOne} />
 
         <Services />
-        <InfoSection {...homeObjTwo} />
-        <InfoSection {...homeObjThree} />
+        {/*  <InfoSection {...homeObjTwo} />
+         <InfoSection {...homeObjThree} />
 
-        {/* <InfoSection {...homeObjFour}/> */}
+        <InfoSection {...homeObjFour}/> 
         <Map {...homeObj} />
-        <InfoSection {...homeObjFive} />
+        <InfoSection {...homeObjFive} />*/}
 
         <Footer />
-      </Trans>
+     
+     </div>
+        
     </>
   );
 };

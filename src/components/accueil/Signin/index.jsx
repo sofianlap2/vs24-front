@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Video from '../../../videos/video.mp4';
+import Video from '../../../videos/Bochra.mp4';
 import Cookies from "js-cookie";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -13,10 +13,12 @@ import {
   FormLabel,
   Icon,
   Text,
-  FormButton,
+ 
   FormLinks,
   VideoBg,
   HeroBg,
+  FormButton,
+  NavBtn,
 } from './SigninElement';
 
 const SignIn = () => {
@@ -109,10 +111,12 @@ const SignIn = () => {
               onChange={(e) => setPassword(e.target.value)} style={{fontFamily: 'Constantia'}}
             />
             
-            <div>
-              <FormButton type="submit" style={{fontFamily: 'Constantia', fontWeight: 'bold'}}>Connectez</FormButton>
+            <NavBtn>
+                            <FormButton type="submit" style={{fontFamily: 'Constantia', fontWeight: 'bold'}}>Connectez</FormButton>
+
+            </NavBtn>
               <ToastContainer />
-            </div>
+            
             <FormLinks to="/requestResetPassword" style={{fontFamily: 'Constantia'}}>Oublié mot de passe?</FormLinks>
           </Form>
         </FormContent>

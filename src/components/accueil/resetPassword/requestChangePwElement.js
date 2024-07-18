@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { Link as LinkR } from "react-router-dom";
 
 export const Container = styled.div`
     min-height: 692px;
@@ -114,22 +115,31 @@ cursor:pointer;
   }
 
 `;
+export const NavBtn = styled.nav`
+  margin-top: 20px;
+
+  
+`;
 export const FormButton = styled.button`
-  background: #8fd1e3;
-  padding: 16px 0;
-  border: none;
-  border-radius: 4px;
-  color: #fff;
+border-radius: 6.111px;
+  box-shadow: 0px 4.889px 4.889px 0px rgba(0, 0, 0, 0.25);
+  background-color: #9e0000;
+
+  padding: 6px 13px;
+  font: 12px Constantia, sans-serif;
+  text-decoration: none; // Supprimer le soulignement par défaut des liens
+  color: #ffff; // Définir la couleur du texte
+  align-items: center;
   cursor: pointer;
   text-align: center;
+  white-space: nowrap; // Empêcher le retour à la ligne
   display: block; // Ensure the button is a block element
-  width: 100%; // Ensure the button takes the full width of its container
-
+  width: 100%; 
   &:hover {
-    background: #76b8c8; // Add a background color change on hover for better UX
-    color: #2a2559;
-    transition: 0.3s ease-out;
+    background-color: #fff; // Couleur de fond au survol
+    color: #9e0000; // Couleur du texte au survol
   }
+
 `;
 export const Text = styled.span`
             text-align: center;

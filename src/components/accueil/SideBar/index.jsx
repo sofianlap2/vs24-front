@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaAngleDown } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 import {
   SidebarContainer,
   Icon,
@@ -9,24 +10,27 @@ import {
   SidebarMenu,
   SideBtnWrap,
   SidebarRoute,
-  SidebarLi // Added SidebarLi styled component
+  NavDropDown
 } from './SidebarElements';
 
-
 const Sidebar = ({ isOpen, toggle, setShowDemandeClients, setShowDemandePubs }) => {
-  const [dropdownOpen, setDropdownOpen] = useState(false); // State for dropdown
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const toggleDropdown = () => {
+  const toggleDropdown = (event) => {
+    event.stopPropagation(); // Prevent the sidebar from closing
     setDropdownOpen(!dropdownOpen);
   };
 
-  const handleOptionSelect = (option) => {
-    if (option === 'Client') {
-      setShowDemandeClients(true);
-    } else if (option === 'Publicitaire') {
-      setShowDemandePubs(true);
-    }
-    setDropdownOpen(false); // Close dropdown after selection
+  const handleShowDemandeClients = () => {
+    setShowDemandeClients(true);
+    setDropdownOpen(false); // Close dropdown
+    toggle(); // Close the sidebar
+  };
+
+  const handleShowDemandePubs = () => {
+    toggle();
+    setShowDemandePubs(true);
+    setDropdownOpen(false); // Close dropdown
     toggle(); // Close the sidebar
   };
 
@@ -37,19 +41,80 @@ const Sidebar = ({ isOpen, toggle, setShowDemandeClients, setShowDemandePubs }) 
           <CloseIcon />
         </Icon>
         <SidebarWrapper>
-            <SidebarMenu>
-              <SidebarLink style={{fontFamily: 'Constantia'}} to='about' onClick={toggle}>À propos</SidebarLink>
-              <SidebarLink style={{fontFamily: 'Constantia'}} to='valeurs' onClick={toggle}>Valeurs</SidebarLink>
-              <SidebarLink style={{fontFamily: 'Constantia'}} to='produits' onClick={toggle}>Produits</SidebarLink>
-              <SidebarLink style={{fontFamily: 'Constantia'}} to='temoineages' onClick={toggle}>Témoinéages</SidebarLink>
-              <SidebarLink style={{fontFamily: 'Constantia'}} to='map' onClick={toggle}>Carte</SidebarLink>
-              <SidebarLink style={{fontFamily: 'Constantia'}} to='actualite' onClick={toggle}>Actualité</SidebarLink>
-            </SidebarMenu>
-           
-            <SideBtnWrap>
-              <SidebarRoute style={{fontFamily: 'Constantia',fontWeight: 'bold'}} to='/signin'>Se Connecter</SidebarRoute>
-            </SideBtnWrap>
-           
+          <SidebarMenu>
+            <SidebarLink style={{ fontFamily: 'Constantia' }} to='about' onClick={toggle}>Accueil</SidebarLink>
+            <SidebarLink style={{ fontFamily: 'Constantia' }} to='valeurs' onClick={toggle}>Valeurs</SidebarLink>
+            <SidebarLink style={{ fontFamily: 'Constantia' }} to='footer' onClick={toggle}>Contact</SidebarLink>
+            <NavDropDown style={{ position: "relative" }}>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  cursor: "pointer",
+                  color: "#fff",
+                }}
+                onClick={toggleDropdown}
+              >
+                <FaAngleDown
+                  style={{
+                    cursor: "pointer",
+                    color: "#fff",
+                    marginRight: "10px"
+                  }}
+                />
+                <p style={{ fontWeight: "bold", fontFamily: "Constantia" }}>
+                  Joignez
+                </p>
+              </div>
+              {dropdownOpen && (
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "100%",
+                    left: "0",
+                    background: "#fff",
+                    borderRadius: "5px",
+                    zIndex: 1,
+                    padding: "10px"
+                  }}
+                >
+                  <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+                    <li style={{ margin: "10px 0" }}>
+                      <button
+                        onClick={handleShowDemandeClients}
+                        style={{
+                          background: 'transparent',
+                          border: 'none',
+                          color: "#000",
+                          fontWeight: "500",
+                          fontFamily: "Constantia"
+                        }}
+                      >
+                        Client
+                      </button>
+                    </li>
+                    <li style={{ margin: "10px 0" }}>
+                      <button
+                        onClick={handleShowDemandePubs}
+                        style={{
+                          background: 'transparent',
+                          border: 'none',
+                          color: "#000",
+                          fontWeight: "500",
+                          fontFamily: "Constantia"
+                        }}
+                      >
+                        Publicitaire
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              )}
+            </NavDropDown>
+          </SidebarMenu>
+          <SideBtnWrap>
+            <SidebarRoute style={{ fontFamily: 'Constantia', fontWeight: 'bold' }} to='/signin'>Se Connecter</SidebarRoute>
+          </SideBtnWrap>
         </SidebarWrapper>
       </SidebarContainer>
     </>
