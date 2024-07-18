@@ -158,7 +158,7 @@ const AddEspacePublic = () => {
               <div>
                  <label style={{ fontFamily: 'Constantia'}} htmlFor="ville">Ville:</label>
                 <select className="form-select"  aria-label="Default select example" onChange={(e) => setReqBody({ ...reqBody, ville: e.target.value })}>
-                   <option style={{ fontFamily: 'Constantia'}} value=""disabled>Select Ville</option>
+                   <option style={{ fontFamily: 'Constantia'}} value=""disabled selected>Select Ville</option>
                   {cities.map(ville => (
                      <option style={{ fontFamily: 'Constantia'}} key={ville} value={ville}>{ville}</option>
                   ))}

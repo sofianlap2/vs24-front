@@ -167,7 +167,7 @@ const ReclamationsManagement = () => {
                   onClick={handleButtonClick}
                   className="btn btn-success"
                 >
-                  Cathegorie
+                  Catégorie
                 </button>
               )}
           

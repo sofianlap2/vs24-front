@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaAngleDown } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import {
   SidebarContainer,
@@ -15,6 +16,7 @@ import {
 
 const Sidebar = ({ isOpen, toggle, setShowDemandeClients, setShowDemandePubs }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const navigate = useNavigate(); // Initialize useNavigate hook
 
   const toggleDropdown = (event) => {
     event.stopPropagation(); // Prevent the sidebar from closing
@@ -22,14 +24,14 @@ const Sidebar = ({ isOpen, toggle, setShowDemandeClients, setShowDemandePubs }) 
   };
 
   const handleShowDemandeClients = () => {
-    setShowDemandeClients(true);
-    setDropdownOpen(false); // Close dropdown
+    navigate(`/demandeClient`);
+        setDropdownOpen(false); // Close dropdown
     toggle(); // Close the sidebar
   };
 
   const handleShowDemandePubs = () => {
     toggle();
-    setShowDemandePubs(true);
+    navigate(`/demandePub`);
     setDropdownOpen(false); // Close dropdown
     toggle(); // Close the sidebar
   };
@@ -70,9 +72,9 @@ const Sidebar = ({ isOpen, toggle, setShowDemandeClients, setShowDemandePubs }) 
                 <div
                   style={{
                     position: "absolute",
-                    top: "100%",
-                    left: "0",
-                    background: "#fff",
+                    top: "25px",
+                    left: "80px",
+                    background: "transparent",
                     borderRadius: "5px",
                     zIndex: 1,
                     padding: "10px"
@@ -80,12 +82,12 @@ const Sidebar = ({ isOpen, toggle, setShowDemandeClients, setShowDemandePubs }) 
                 >
                   <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
                     <li style={{ margin: "10px 0" }}>
-                      <button
+                      <button 
                         onClick={handleShowDemandeClients}
                         style={{
                           background: 'transparent',
                           border: 'none',
-                          color: "#000",
+                          color: "#fff",
                           fontWeight: "500",
                           fontFamily: "Constantia"
                         }}
@@ -94,12 +96,12 @@ const Sidebar = ({ isOpen, toggle, setShowDemandeClients, setShowDemandePubs }) 
                       </button>
                     </li>
                     <li style={{ margin: "10px 0" }}>
-                      <button
+                      <button to='demandePub'
                         onClick={handleShowDemandePubs}
                         style={{
                           background: 'transparent',
                           border: 'none',
-                          color: "#000",
+                          color: "#fff",
                           fontWeight: "500",
                           fontFamily: "Constantia"
                         }}

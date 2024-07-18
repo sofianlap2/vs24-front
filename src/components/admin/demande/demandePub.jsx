@@ -7,6 +7,7 @@ import { CloseIcon } from "./publiciteElement";
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import BackgroundVideo from "../../../videos/Bochra.mp4";
 
 // Load dotenv to access environment variables
 
@@ -23,7 +24,6 @@ const DemandePub = ({ setShowDemandePubs }) => {
 
   // Access APP_URL from environment variables
   const appUrl = import.meta.env.VITE_REACT_APP_BASE_URL;
-
 
   // State for form data
   const [reqBody, setReqBody] = useState({
@@ -64,6 +64,7 @@ const DemandePub = ({ setShowDemandePubs }) => {
 
       setEspacePublics(response.data);
     } catch (error) {
+      console.error(error);
     }
   };
 
@@ -76,6 +77,7 @@ const DemandePub = ({ setShowDemandePubs }) => {
         );
         setCities(response.data);
       } catch (error) {
+        console.error(error);
       }
     };
 
@@ -98,7 +100,7 @@ const DemandePub = ({ setShowDemandePubs }) => {
           body: JSON.stringify({ ...reqBody, espacePublic: selectedEspacePublics, typeEspace: selectedTypeEspace }),
         }
       );
- 
+
       if (response.status === 200) {
         toast.success("Demande soumise avec succès !");
         // Clear form fields after successful submission
@@ -121,9 +123,14 @@ const DemandePub = ({ setShowDemandePubs }) => {
         setSelectedCity('');
         setSelectedTypeEspace('');
         setSelectedEspacePublics([]);
+        const isMobile = window.innerWidth <= 975;
         setTimeout(() => {
-          setShowDemandePubs(false);
-        }, 6500);
+          if (isMobile) {
+            navigate(`/`);
+          } else {
+            setShowDemandePubs(false);
+          }
+        }, 5000);
       } else {
         const errorData = await response.json();
         toast.error("Failed to submit demande. " + errorData.message); // Display backend error message
@@ -161,6 +168,7 @@ const DemandePub = ({ setShowDemandePubs }) => {
   const handleShowDemandePubs = () => {
     setShowDemandePubs(false);
   };
+
   const handleCheckboxChange = (espacePublicId) => {
     setSelectedEspacePublics((prevEspacePublics) => {
       if (prevEspacePublics.includes(espacePublicId)) {
@@ -170,15 +178,26 @@ const DemandePub = ({ setShowDemandePubs }) => {
       }
     });
   };
-  return (
-    <div className="demande-pub">
-      <ToastContainer /> {/* Container for displaying toasts */}
-      <CloseIcon
-        onClick={handleShowDemandePubs}
-        style={{ justifyItems: "right" }}
-      />
 
-      <h3 style={{fontFamily: 'Constantia', fontWeight: 'bold'}}>Formulaire de devenir publicitaire</h3>
+  const isMobile = window.innerWidth <= 975;
+
+  return (
+    
+      <div className="demande-pub" id="demandePub">
+      {isMobile && (
+        <video className="video-background" autoPlay loop muted>
+          <source src={BackgroundVideo} type="video/mp4" />
+        </video>
+      )}
+        <ToastContainer /> {/* Container for displaying toasts */}
+        {!isMobile && (
+          <CloseIcon
+            onClick={handleShowDemandePubs}
+            style={{ justifyItems: "right" }}
+            className="close-icon"
+          />
+        )}
+          <h3 style={{fontFamily: 'Constantia', fontWeight: 'bold',color:'#fff'}}>Formulaire de devenir publicitaire</h3>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="nomEntreprise">Nom d'entreprise:</label>
@@ -244,105 +263,104 @@ const DemandePub = ({ setShowDemandePubs }) => {
           />
        
         </div>
-        <div>
-          <tr>
-            <th>
-              <label>
-                Governorate:
-                <select
-                  className="form-select"
-                  style={{
-                    height: "35px",
-                    justifyItems: "center",
-                    width: "10vw",
-                  }}
-                  value={selectedGovernorate}
-                  onChange={(e) => {
-                    setSelectedGovernorate(e.target.value);
-                    setReqBody({ ...reqBody, gouvernorat: e.target.value });
-                  }}
-                >
-                  <option value=""disabled selected>Gouvernorat</option>
-                  <option value="Ariana">Ariana</option>
-                  <option value="Béja">Béja</option>
-                  <option value="BenArous">BenArous</option>
-                  <option value="Bizerte">Bizerte</option>
-                  <option value="Gabès">Gabès</option>
-                  <option value="Gafsa">Gafsa</option>
-                  <option value="Jendouba">Jendouba</option>
-                  <option value="Kairouan">Kairouan</option>
-                  <option value="Kasserine">Kasserine</option>
-                  <option value="Kébili">Kébili</option>
-                  <option value="LeKef">Le Kef</option>
-                  <option value="Mahdia">Mahdia</option>
-                  <option value="LaManouba">LA Manouba</option>
-                  <option value="Médenine">Médenine</option>
-                  <option value="Monastir">Monastir</option>
-                  <option value="Nabeul">Nabeul</option>
-                  <option value="Sfax">Sfax</option>
-                  <option value="SidiBouzid">Sidi Bouzid</option>
-                  <option value="Siliana">Siliana</option>
-                  <option value="Sousse">Sousse</option>
-                  <option value="Tataouine">Tataouine</option>
-                  <option value="Tozeur">Tozeur</option>
-                  <option value="Tunis">Tunis</option>
-                  <option value="Zaghouan">Zaghouan</option>
-                </select>
-              </label>
-            </th>
-            <th style={{ marginLeft: "0.8vw" }}>
-              <label htmlFor="ville" style={{ marginLeft: "0.8vw" }}>
-                Ville:
-                <select
-                  className="form-select"
-                  style={{
-                    height: "35px",
-                    justifyItems: "center",
-                    width: "10vw",
-                  }}
-                  value={selectedCity}
-                  onChange={(e) => {
-                    setSelectedCity(e.target.value);
-                    setReqBody({ ...reqBody, ville: e.target.value });
-                  }}
-                >
-                  <option value=""disabled selected>Select Ville</option>
-                  {cities.map((ville) => (
+        <div className="form-group">
+  <div className="form-item">
+    <label htmlFor="gouvernorat">
+      Governorate:
+      <select
+        className="form-select"
+        style={{
+          height: "35px",
+          justifyItems: "center",
+          width: "100%", // Make it responsive
+        }}
+        value={selectedGovernorate}
+        onChange={(e) => {
+          setSelectedGovernorate(e.target.value);
+          setReqBody({ ...reqBody, gouvernorat: e.target.value });
+        }}
+      >
+       
+       <option value="" disabled selected>Sélectionnez le gouvernorat</option>
+        <option value="Ariana">Ariana</option>
+        <option value="Béja">Béja</option>
+        <option value="BenArous">BenArous</option>
+        <option value="Bizerte">Bizerte</option>
+        <option value="Gabès">Gabès</option>
+        <option value="Gafsa">Gafsa</option>
+        <option value="Jendouba">Jendouba</option>
+        <option value="Kairouan">Kairouan</option>
+        <option value="Kasserine">Kasserine</option>
+        <option value="Kébili">Kébili</option>
+        <option value="LeKef">Le Kef</option>
+        <option value="Mahdia">Mahdia</option>
+        <option value="LaManouba">La Manouba</option>
+        <option value="Médenine">Médenine</option>
+        <option value="Monastir">Monastir</option>
+        <option value="Nabeul">Nabeul</option>
+        <option value="Sfax">Sfax</option>
+        <option value="SidiBouzid">Sidi Bouzid</option>
+        <option value="Siliana">Siliana</option>
+        <option value="Sousse">Sousse</option>
+        <option value="Tataouine">Tataouine</option>
+        <option value="Tozeur">Tozeur</option>
+        <option value="Tunis">Tunis</option>
+        <option value="Zaghouan">Zaghouan</option>
+      </select>
+    </label>
+  </div>
+  <div className="form-item">
+    <label htmlFor="ville">
+      Ville:
+      <select
+        className="form-select"
+        style={{
+          height: "35px",
+          justifyItems: "center",
+          width: "100%", // Make it responsive
+        }}
+        value={selectedCity}
+        onChange={(e) => {
+          setSelectedCity(e.target.value);
+          setReqBody({ ...reqBody, ville: e.target.value });
+        }}
+      >
+        <option value="" disabled selected>Select Ville</option>
+        {cities.map((ville) => (
                     <option key={ville} value={ville}>
                       {ville}
                     </option>
                   ))}
-                </select>
-              </label>
-            </th>
-            <th style={{ marginLeft: "0.8vw" }}>
-              <label style={{ marginLeft: "0.8vw" }}>
-                Secteur d'activité:
-                <select
-                  className="form-select"
-                  style={{
-                    height: "35px",
-                    justifyItems: "center",
-                    width: "10vw",
-                  }}
-                  value={selectedTypeEspace}
-                  onChange={(e) => {
-                    setSelectedTypeEspace(e.target.value);
-                    setReqBody({ ...reqBody, typeEspace: e.target.value });
-                  }}
-                >
-                  <option style={{fontFamily: 'Constantia'}} value=""disabled selected>Select Type</option>
-                  <option style={{fontFamily: 'Constantia'}} value="MALL">Mall</option>
-                  <option style={{fontFamily: 'Constantia'}} value="HOTEL">Hotel</option>
-                  <option style={{fontFamily: 'Constantia'}} value="SALLESPORT">Salle de sport</option>
-                  <option style={{fontFamily: 'Constantia'}} value="HOPITAL">Hopital</option>
-                  <option style={{fontFamily: 'Constantia'}} value="AUTRE">Autre</option>
+                      </select>
+    </label>
+  </div>
+  <div className="form-item">
+    <label htmlFor="secteurActivite">
+      Secteur d'activité:
+      <select
+        className="form-select"
+        style={{
+          height: "35px",
+          justifyItems: "center",
+          width: "100%", // Make it responsive
+        }}
+        value={selectedTypeEspace}
+        onChange={(e) => {
+          setSelectedTypeEspace(e.target.value);
+          setReqBody({ ...reqBody, typeEspace: e.target.value });
+        }}
+      >
+        <option style={{ fontFamily: 'Constantia' }} value="" disabled selected>Select Type</option>
+        <option style={{ fontFamily: 'Constantia' }} value="MALL">Mall</option>
+        <option style={{ fontFamily: 'Constantia' }} value="HOTEL">Hotel</option>
+        <option style={{ fontFamily: 'Constantia' }} value="SALLESPORT">Salle de sport</option>
+        <option style={{ fontFamily: 'Constantia' }} value="HOPITAL">Hopital</option>
+        <option style={{ fontFamily: 'Constantia' }} value="AUTRE">Autre</option>
+      </select>
+    </label>
+  </div>
+</div>
 
-                </select>
-              </label>
-            </th>
-          </tr>
-        </div>
         <div>
           <tr>
             <th>

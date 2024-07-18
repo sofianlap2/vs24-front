@@ -6,6 +6,8 @@ import { CloseIcon } from './clientElement';
 import "react-phone-number-input/style.css";
 import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
 import { ToastContainer, toast } from 'react-toastify';
+import BackgroundVideo from "../../../videos/Bochra.mp4";
+
 import 'react-toastify/dist/ReactToastify.css';
 const DemandeClients = ({ setShowDemandeClients }) => {
   const navigate = useNavigate();
@@ -76,9 +78,14 @@ const DemandeClients = ({ setShowDemandeClients }) => {
         setPhoneNumber2("");
         setSelectedGovernorate('');
         setSelectedCity('');
+        const isMobile = window.innerWidth <= 975;
         setTimeout(() => {
-          setShowDemandeClients(false);
-        }, 6500);
+          if (isMobile) {
+            navigate(`/`);
+          } else {
+            setShowDemandeClients(false);
+          }
+        }, 5000);
       } else {
         toast.error(responseData.message );
       }
@@ -110,13 +117,24 @@ const DemandeClients = ({ setShowDemandeClients }) => {
   const handleShowDemandeClients = () => {
     setShowDemandeClients(false);
   };
+  const isMobile = window.innerWidth <= 975;
 
   return (
-    <div className='demande-clients'>
-      <CloseIcon onClick={handleShowDemandeClients} style={{ justifyContent: 'right' }} />
-      <h3 style={{fontFamily: 'Constantia', fontWeight: 'bold'}}>Formulaire de devenir client</h3>
+    <div className='demande-clients' id='demandeClient'>
+ {isMobile && (
+        <video className="video-background" autoPlay loop muted>
+          <source src={BackgroundVideo} type="video/mp4" />
+        </video>
+      )}
+        <ToastContainer /> {/* Container for displaying toasts */}
+        {!isMobile && (
+          <CloseIcon
+            onClick={handleShowDemandeClients}
+            style={{ justifyItems: "right" }}
+            className="close-icon"
+          />
+        )}      <h3 style={{fontFamily: 'Constantia', fontWeight: 'bold',color:'#fff'}}>Formulaire de devenir client</h3>
       
-      <ToastContainer />
       
       <form onSubmit={handleSubmit}>
         <div>
@@ -147,62 +165,7 @@ const DemandeClients = ({ setShowDemandeClients }) => {
             required
             value={reqBody.metier}
             onChange={(e) => setReqBody({ ...reqBody, metier: e.target.value })}
-          />
-        </div>
-        <div>
-          <label>
-            Governorat:
-            <select
-              className="form-select"
-              style={{ height: "35px", justifyItems: 'center', width: '10vw' }}
-              aria-label="Sélectionnez le gouvernorat"
-              value={selectedGovernorate}
-              onChange={(e) => { setSelectedGovernorate(e.target.value); setReqBody({ ...reqBody, gouvernorat: e.target.value }); }}
-            >
-              <option value=""disabled selected>Sélectionnez le gouvernorat</option>
-              <option value="Ariana">Ariana</option>
-              <option value="Béja">Béja</option>
-              <option value="BenArous">BenArous</option>
-              <option value="Bizerte">Bizerte</option>
-              <option value="Gabès">Gabès</option>
-              <option value="Gafsa">Gafsa</option>
-              <option value="Jendouba">Jendouba</option>
-              <option value="Kairouan">Kairouan</option>
-              <option value="Kasserine">Kasserine</option>
-              <option value="Kébili">Kébili</option>
-              <option value="LeKef">Le Kef</option>
-              <option value="Mahdia">Mahdia</option>
-              <option value="LaManouba">La Manouba</option>
-              <option value="Médenine">Médenine</option>
-              <option value="Monastir">Monastir</option>
-              <option value="Nabeul">Nabeul</option>
-              <option value="Sfax">Sfax</option>
-              <option value="SidiBouzid">Sidi Bouzid</option>
-              <option value="Siliana">Siliana</option>
-              <option value="Sousse">Sousse</option>
-              <option value="Tataouine">Tataouine</option>
-              <option value="Tozeur">Tozeur</option>
-              <option value="Tunis">Tunis</option>
-              <option value="Zaghouan">Zaghouan</option>
-            </select>
-          </label>
-          <label style={{ marginLeft: "0.8vw" }}>
-            Ville:
-            <select
-              className="form-select"
-              style={{ height: "35px", justifyItems: 'center', width: '10vw' }}
-              aria-label="Sélectionnez la ville"
-              value={selectedCity}
-              onChange={(e) => { setSelectedCity(e.target.value); setReqBody({ ...reqBody, ville: e.target.value }); }}
-            >
-              <option value=""disabled selected>Sélectionnez la ville</option>
-              {cities.map(ville => (
-                <option key={ville} value={ville}>{ville}</option>
-              ))}
-            </select>
-          </label>
-        </div>
-        <div>
+          /><div>
           <label style={{fontFamily: 'Constantia'}} htmlFor="email">Email :</label>
           <input style={{fontFamily: 'Constantia'}}
             type="email"
@@ -212,6 +175,64 @@ const DemandeClients = ({ setShowDemandeClients }) => {
             onChange={(e) => setReqBody({ ...reqBody, email: e.target.value })}
           />
         </div>
+        </div>
+        <div className="form-group">
+      <label htmlFor="gouvernorat">Gouvernorat:</label>
+      <select
+        className="form-select"
+        aria-label="Sélectionnez le gouvernorat"
+        value={selectedGovernorate}
+        onChange={(e) => {
+          setSelectedGovernorate(e.target.value);
+          setReqBody({ ...reqBody, gouvernorat: e.target.value });
+        }}
+      >
+        <option value="" disabled selected>Sélectionnez le gouvernorat</option>
+        <option value="Ariana">Ariana</option>
+        <option value="Béja">Béja</option>
+        <option value="BenArous">BenArous</option>
+        <option value="Bizerte">Bizerte</option>
+        <option value="Gabès">Gabès</option>
+        <option value="Gafsa">Gafsa</option>
+        <option value="Jendouba">Jendouba</option>
+        <option value="Kairouan">Kairouan</option>
+        <option value="Kasserine">Kasserine</option>
+        <option value="Kébili">Kébili</option>
+        <option value="LeKef">Le Kef</option>
+        <option value="Mahdia">Mahdia</option>
+        <option value="LaManouba">La Manouba</option>
+        <option value="Médenine">Médenine</option>
+        <option value="Monastir">Monastir</option>
+        <option value="Nabeul">Nabeul</option>
+        <option value="Sfax">Sfax</option>
+        <option value="SidiBouzid">Sidi Bouzid</option>
+        <option value="Siliana">Siliana</option>
+        <option value="Sousse">Sousse</option>
+        <option value="Tataouine">Tataouine</option>
+        <option value="Tozeur">Tozeur</option>
+        <option value="Tunis">Tunis</option>
+        <option value="Zaghouan">Zaghouan</option>
+      </select>
+    </div>
+
+    <div className="form-group">
+      <label htmlFor="ville">Ville:</label>
+      <select
+        className="form-select"
+        aria-label="Sélectionnez la ville"
+        value={selectedCity}
+        onChange={(e) => {
+          setSelectedCity(e.target.value);
+          setReqBody({ ...reqBody, ville: e.target.value });
+        }}
+      >
+        <option value="" disabled selected>Sélectionnez la ville</option>
+        {cities.map(ville => (
+          <option key={ville} value={ville}>{ville}</option>
+        ))}
+      </select>
+    </div>
+        
         <div>
           <label style={{fontFamily: 'Constantia'}} htmlFor="phoneNumber">Téléphone :</label>
           <PhoneInput
