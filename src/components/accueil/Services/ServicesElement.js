@@ -193,17 +193,16 @@ padding:10px
   
 `;
 export const ServicesIcon = styled.img`
-  width: 200px;
-  height: 160px;
+  width: auto;
+  height: 100px;
   display: flex;
   margin-bottom: 18px;
-    margin-top: 5px;
+    margin-top: 25px;
 @media only screen and (max-width: 600px)
  {
          display: flex;
-  width: 50%;
-    margin-top: -10px;
-
+  width: auto;
+    margin-top: 50px;
     height: 20%;
   text-align: center;
   }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './DemandeClients.css'; // Import CSS file for styling
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { CloseIcon } from './clientElement';
+import { CloseIcon,Icon } from './clientElement';
 import "react-phone-number-input/style.css";
 import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
 import { ToastContainer, toast } from 'react-toastify';
@@ -121,11 +121,18 @@ const DemandeClients = ({ setShowDemandeClients }) => {
 
   return (
     <div className='demande-clients' id='demandeClient'>
- {isMobile && (
-        <video className="video-background" autoPlay loop muted>
-          <source src={BackgroundVideo} type="video/mp4" />
-        </video>
-      )}
+    {isMobile && (
+  <>
+    <Icon to="/">
+      <img src="../../images/RemoteHub.png" height="55px" alt="RemoteHub Logo" loading="lazy" />
+    </Icon>
+    <br/>
+    <video className="video-background" autoPlay loop muted>
+      <source src={BackgroundVideo} type="video/mp4" />
+    </video>
+  </>
+)}
+
         <ToastContainer /> {/* Container for displaying toasts */}
         {!isMobile && (
           <CloseIcon
@@ -133,10 +140,12 @@ const DemandeClients = ({ setShowDemandeClients }) => {
             style={{ justifyItems: "right" }}
             className="close-icon"
           />
-        )}      <h3 style={{fontFamily: 'Constantia', fontWeight: 'bold',color:'#fff'}}>Formulaire de devenir client</h3>
+        )}      
       
       
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} style={{marginTop:'5vh'}}>
+      <h3 style={{fontFamily: 'Constantia', fontWeight: 'bold',color:'#fff'}}>Formulaire de devenir client</h3>
+
         <div>
           <label htmlFor="nomEntreprise">Nom d'entreprise:</label>
           <input style={{fontFamily: 'Constantia'}}

@@ -3,7 +3,7 @@ import "./DemandePub.css";
 import { useNavigate } from "react-router-dom";
 import "react-phone-number-input/style.css";
 import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
-import { CloseIcon } from "./publiciteElement";
+import { CloseIcon,Icon } from "./publiciteElement";
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -184,11 +184,17 @@ const DemandePub = ({ setShowDemandePubs }) => {
   return (
     
       <div className="demande-pub" id="demandePub">
-      {isMobile && (
-        <video className="video-background" autoPlay loop muted>
-          <source src={BackgroundVideo} type="video/mp4" />
-        </video>
-      )}
+       {isMobile && (
+  <>
+    <Icon to="/">
+      <img src="../../images/RemoteHub.png" height="55px" alt="RemoteHub Logo" loading="lazy" />
+    </Icon>
+    <br/>
+    <video className="video-background" autoPlay loop muted>
+      <source src={BackgroundVideo} type="video/mp4" />
+    </video>
+  </>
+)}
         <ToastContainer /> {/* Container for displaying toasts */}
         {!isMobile && (
           <CloseIcon
@@ -197,8 +203,9 @@ const DemandePub = ({ setShowDemandePubs }) => {
             className="close-icon"
           />
         )}
-          <h3 style={{fontFamily: 'Constantia', fontWeight: 'bold',color:'#fff'}}>Formulaire de devenir publicitaire</h3>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} style={{marginTop:'5vh'}}>
+      <h3 style={{fontFamily: 'Constantia', fontWeight: 'bold',color:'#fff'}}>Formulaire de devenir publicitaire</h3>
+
         <div>
           <label htmlFor="nomEntreprise">Nom d'entreprise:</label>
           <input style={{fontFamily: 'Constantia'}}

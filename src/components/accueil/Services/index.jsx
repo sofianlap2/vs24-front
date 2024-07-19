@@ -24,7 +24,6 @@ import { ServicesContainer,ServicesCard
 ServicesPVS,ServicesDivVS,
 ServicesP,
 VideoBg} from './ServicesElement'
-import { Trans } from 'react-i18next';
 const Services = () => {
     
     const [currentCard, setCurrentCard] = useState(0);
@@ -84,7 +83,7 @@ const Services = () => {
     };
   return (
     <ServicesContainer id="valeurs">
-    <Trans>
+   
     <VideoBg autoPlay loop muted src={Video} type="video/mp4" />
 
     <div >
@@ -129,7 +128,7 @@ const Services = () => {
     </ServicesDivVS>
    
             </div>
-            </Trans>
+           
 
    </ServicesContainer >
   )

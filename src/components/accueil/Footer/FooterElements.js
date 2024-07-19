@@ -22,7 +22,8 @@ margin: 0 auto;
 box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.3); /* Inversez l'ombre pour la mettre en haut */
  @media only screen and (max-width : 600px){
     margin-top: -50px;
- 
+ padding: 8px 50px;
+
  
     `;
 export const FooterLinksContainer = styled.div`

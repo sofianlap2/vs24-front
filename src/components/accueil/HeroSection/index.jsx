@@ -15,7 +15,7 @@ import { Button } from "../ButtonElement";
 import { Trans } from "react-i18next";
 import DemandeClients from "../../admin/demande/demandeClients";
 import { Margin } from "@mui/icons-material";
-import rr from "../../../images/cc.png"
+// import rr from "../../../images/cc.png"
 
 const HeroSection = () => {
   const [hover, setHover] = useState(false);
